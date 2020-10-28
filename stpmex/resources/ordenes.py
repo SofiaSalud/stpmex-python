@@ -70,8 +70,8 @@ class Orden(Resource):
 
     def __post_init__(self):
         # Test before Pydantic coerces it to a float
-        if not isinstance(self.monto, float):
-            raise ValueError('monto must be a float')
+        if not isinstance(self.monto, float) or self.monto < 0:
+            raise ValueError('monto must be a float and greater than 0')
         cb = self.cuentaBeneficiario
         self.tipoCuentaBeneficiario = self.get_tipo_cuenta(cb)
 
