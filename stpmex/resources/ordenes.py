@@ -37,7 +37,7 @@ class Orden(Resource):
     _endpoint: ClassVar[str] = '/ordenPago'
     _firma_fieldnames: ClassVar[List[str]] = ORDEN_FIELDNAMES
 
-    monto: PositiveFloat
+    monto: float
     conceptoPago: truncated_str(39)
 
     cuentaBeneficiario: Union[Clabe, PaymentCardNumber, MxPhoneNumber]
