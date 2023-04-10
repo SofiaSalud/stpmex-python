@@ -163,7 +163,7 @@ class Orden(Resource):
             ordenes = []
         else:
             ordenes = [
-                cls._sanitize_consulta(orden) for orden in resp if orden
+                cls._sanitize_consulta(orden) for orden in resp['lst'] if orden
             ]
         return ordenes
 
