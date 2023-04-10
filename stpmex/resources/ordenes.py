@@ -158,7 +158,7 @@ class Orden(Resource):
             consulta['fechaOperacion'] = strftime(fechaOperacion)
         consulta['firma'] = cls._firma_consulta(consulta)
         try:
-            resp = cls._client.post(endpoint, consulta)['lst']
+            resp = cls._client.post(endpoint, consulta)
         except NoOrdenesEncontradas:
             ordenes = []
         else:
