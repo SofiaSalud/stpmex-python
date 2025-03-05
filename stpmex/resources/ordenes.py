@@ -54,8 +54,8 @@ class Orden(Resource):
     claveRastreo: truncated_str(29) = field(
         default_factory=lambda: f'CR{int(time.time())}'
     )
-    referenciaNumerica: conint(gt=0, lt=10 ** 7) = field(
-        default_factory=lambda: random.randint(10 ** 6, 10 ** 7)
+    referenciaNumerica: conint(gt=0, lt=10**7) = field(
+        default_factory=lambda: random.randint(10**6, 10**7)
     )
     rfcCurpBeneficiario: constr(max_length=18) = 'ND'
     rfcCurpOrdenante: Optional[constr(max_length=18)] = None
@@ -208,13 +208,13 @@ class Orden(Resource):
 
     @staticmethod
     def _sanitize_consulta(
-        orden: Dict[str, Any]
+        orden: Dict[str, Any],
     ) -> 'OrdenConsultada':  # noqa: F821
         sanitized = {}
         for k, v in orden.items():
             if k.startswith('ts'):
-                v /= 10 ** 3  # convertir de milisegundos a segundos
-                if v > 10 ** 9:
+                v /= 10**3  # convertir de milisegundos a segundos
+                if v > 10**9:
                     v = dt.datetime.fromtimestamp(v)
             elif k == 'fechaOperacion':
                 v = strptime(v)
