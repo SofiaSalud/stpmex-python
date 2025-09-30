@@ -3,8 +3,8 @@ import unicodedata
 from enum import Enum
 from typing import TYPE_CHECKING, ClassVar, Optional, Type
 
-from clabe.types import validate_digits
 from pydantic import ConstrainedStr, StrictStr, constr
+from pydantic.errors import NotDigitError
 from pydantic.types import PaymentCardNumber as PydanticPaymentCardNumber
 from pydantic.validators import (
     constr_length_validator,
@@ -14,6 +14,13 @@ from pydantic.validators import (
 
 if TYPE_CHECKING:
     from pydantic.typing import CallableGenerator  # pragma: no cover
+
+
+def validate_digits(v: str) -> str:
+    if not v.isdigit():
+        raise NotDigitError
+
+    return v
 
 
 def unicode_to_ascii(unicode: str) -> str:
